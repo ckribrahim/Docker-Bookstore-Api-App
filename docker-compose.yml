@@ -5,30 +5,24 @@ services:
     ports:
       - 80:80
     networks:
-      - techpronet  
+      - techpronet
     depends_on:
       - database
-    restart: always    
-
-
+    restart: always
   database:
     image: mysql:5.7
     container_name: mysql_db
-    ports:
-      - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: P123456p
       MYSQL_DATABASE: bookstore_db
       MYSQL_USER: techproed
       MYSQL_PASSWORD: techpro1234
     networks:
       - techpronet
     volumes:
-      - techprovol:/var/lib/myswl  
-
+      - techprovol:/var/lib/mysql
 networks:
   techpronet:
-  
 volumes:
   techprovol:
   
