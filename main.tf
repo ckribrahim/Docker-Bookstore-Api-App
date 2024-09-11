@@ -11,17 +11,11 @@ provider "aws" {
   # Configuration options
 }
 
-locals {
-  secgr-dynamic-ports = [22,80,443,8080,5000]
-  user= "cptgrey"
-}
-
 resource "aws_instance" "tf-docker-ec2" {
     ami = "ami-00c39f71452c08778"
     instance_type = "t2.micro"
     key_name = "cpt"
     vpc_security_group_ids = [aws_security_group.allow_ssh.id]
-    
     tags = {
         Name = "Bookstore Web Server"
     }
@@ -39,9 +33,12 @@ resource "aws_instance" "tf-docker-ec2" {
           git clone https://github.com/ckribrahim/Docker-Bookstore-Api-App.git
           cd /home/ec2-user/Docker-Project-Bookstore-Api
           docker-compose up -d
-          EOF
-
+          EOF 
     }
+locals {
+  secgr-dynamic-ports = [22,80,443,8080,5000]
+  user= "techpro"
+}
 
 resource "aws_security_group" "allow_ssh" {
   name        = "${local.user}-docker-instance-sg"
@@ -65,6 +62,6 @@ resource "aws_security_group" "allow_ssh" {
 }
 
 output "name" {
-  value = "http://${aws_instance.tf-docker-ec2.public_ip}"
+  value= "http://${aws_instance.tf-docker-ec2.public_ip}"
 }
 
