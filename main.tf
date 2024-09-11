@@ -31,7 +31,7 @@ resource "aws_instance" "tf-docker-ec2" {
           chmod +x /usr/local/bin/docker-compose
           cd /home/ec2-user
           git clone https://github.com/ckribrahim/Docker-Bookstore-Api-App.git
-          cd /home/ec2-user/Docker-Project-Bookstore-Api
+          cd /home/ec2-user/Docker-Project-Bookstore-Api-App
           docker-compose up -d
           EOF 
     }
